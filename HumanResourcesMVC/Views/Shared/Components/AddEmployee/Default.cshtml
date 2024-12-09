@@ -1,0 +1,92 @@
+﻿@using HumanResourcesMVC.Models.ViewModels.User.Employee
+@model AddEmployeeVM
+
+<form asp-area="DirectorPanel" asp-controller="Employee" asp-action="AddEmployee" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="col-md-12 p-0">
+        <div class="form-popup">
+            <label asp-for="@Model.addEmployeeFormDTO.Name" class="control-label"></label>
+            <input asp-for="@Model.addEmployeeFormDTO.Name" class="form-control" />
+            <span asp-validation-for="@Model.addEmployeeFormDTO.Name" class="text-danger"></span>
+        </div>
+        <div class="form-popup">
+            <label asp-for="@Model.addEmployeeFormDTO.SecondName" class="control-label"></label>
+            <input asp-for="@Model.addEmployeeFormDTO.SecondName" class="form-control" />
+            <span asp-validation-for="@Model.addEmployeeFormDTO.SecondName" class="text-danger"></span>
+        </div>
+        <div class="form-popup">
+            <label asp-for="@Model.addEmployeeFormDTO.LastName" class="control-label"></label>
+            <input asp-for="@Model.addEmployeeFormDTO.LastName" class="form-control" />
+            <span asp-validation-for="@Model.addEmployeeFormDTO.LastName" class="text-danger"></span>
+        </div>
+        <div class="form-popup">
+            <label asp-for="@Model.addEmployeeFormDTO.SecondLastName" class="control-label"></label>
+            <input asp-for="@Model.addEmployeeFormDTO.SecondLastName" class="form-control" />
+            <span asp-validation-for="@Model.addEmployeeFormDTO.SecondLastName" class="text-danger"></span>
+        </div>
+        <div class="form-popup">
+            <label asp-for="@Model.addEmployeeFormDTO.Photo" class="control-label"></label>
+            <input asp-for="@Model.addEmployeeFormDTO.Photo" type="file" class="form-control" />
+            <span asp-validation-for="@Model.addEmployeeFormDTO.Photo" class="text-danger"></span>
+        </div>
+        <div class="form-popup">
+            <label asp-for="@Model.addEmployeeFormDTO.BirthDate" class="control-label"></label>
+            <input asp-for="@Model.addEmployeeFormDTO.BirthDate" class="form-control" />
+            <span asp-validation-for="@Model.addEmployeeFormDTO.BirthDate" class="text-danger"></span>
+        </div>
+        <div class="form-popup">
+            <label asp-for="@Model.addEmployeeFormDTO.BirthPlace" class="control-label"></label>
+            <input asp-for="@Model.addEmployeeFormDTO.BirthPlace" class="form-control" />
+            <span asp-validation-for="@Model.addEmployeeFormDTO.BirthPlace" class="text-danger"></span>
+        </div>
+        <div class="form-popup">
+            <label asp-for="@Model.addEmployeeFormDTO.Salary" class="control-label"></label>
+            <input asp-for="@Model.addEmployeeFormDTO.Salary" class="form-control" />
+            <span asp-validation-for="@Model.addEmployeeFormDTO.Salary" class="text-danger"></span>
+        </div>
+        <div class="form-popup">
+            <label asp-for="@Model.addEmployeeFormDTO.TC" class="control-label"></label>
+            <input asp-for="@Model.addEmployeeFormDTO.TC" class="form-control" />
+            <span asp-validation-for="@Model.addEmployeeFormDTO.TC" class="text-danger"></span>
+        </div>
+        <div class="form-popup">
+            <label asp-for="@Model.addEmployeeFormDTO.StartDate" class="control-label"></label>
+            <input asp-for="@Model.addEmployeeFormDTO.StartDate" class="form-control" />
+            <span asp-validation-for="@Model.addEmployeeFormDTO.StartDate" class="text-danger"></span>
+        </div>
+        <div class="form-popup">
+            <label asp-for="@Model.addEmployeeFormDTO.JobID" class="control-label"></label>
+            <select asp-for="@Model.addEmployeeFormDTO.JobID" asp-items="@Model.Job" class="form-control"></select>
+            <span asp-validation-for="@Model.addEmployeeFormDTO.JobID" class="text-danger"></span>
+        </div>
+        <div class="form-popup">
+            <label asp-for="@Model.addEmployeeFormDTO.DepartmentID" class="control-label"></label>
+            <select asp-for="@Model.addEmployeeFormDTO.DepartmentID" asp-items="@Model.Department" class="form-control"></select>
+            <span asp-validation-for="@Model.addEmployeeFormDTO.DepartmentID" class="text-danger"></span>
+        </div>
+        <div class="form-popup">
+            <label asp-for="@Model.addEmployeeFormDTO.Email" class="control-label"></label>
+            <input asp-for="@Model.addEmployeeFormDTO.Email" class="form-control" />
+            <span asp-validation-for="@Model.addEmployeeFormDTO.Email" class="text-danger"></span>
+        </div>
+        <div class="form-popup">
+            <label asp-for="@Model.addEmployeeFormDTO.Address" class="control-label"></label>
+            <input asp-for="@Model.addEmployeeFormDTO.Address" class="form-control" />
+            <span asp-validation-for="@Model.addEmployeeFormDTO.Address" class="text-danger"></span>
+        </div>
+        <div class="form-popup">
+            <label asp-for="@Model.addEmployeeFormDTO.PhoneNumber" class="control-label"></label>
+            <input asp-for="@Model.addEmployeeFormDTO.PhoneNumber" class="form-control" />
+            <span asp-validation-for="@Model.addEmployeeFormDTO.PhoneNumber" class="text-danger"></span>
+        </div>
+        <div class="form-popup">
+            <label asp-for="@Model.addEmployeeFormDTO.CompanyID" class="control-label"></label>
+            <select asp-for="@Model.addEmployeeFormDTO.CompanyID" asp-items="@Model.Company" class="form-control"></select>
+            <span asp-validation-for="@Model.addEmployeeFormDTO.CompanyID" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Create</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+    </div>
+</form>

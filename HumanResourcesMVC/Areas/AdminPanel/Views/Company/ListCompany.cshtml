@@ -1,0 +1,431 @@
+﻿@model IEnumerable<ListCompanyVM>
+
+@{
+    ViewData["Title"] = "List Company";
+    // Layout = "_AdminLayout";
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">Close </button>
+    </div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @TempData["ErrorMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">Close </button>
+    </div>
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <title>Deneme</title>
+
+    <link rel="shortcut icon" href="~/Dashboard/assets/img/favicon.png">
+    <link rel="stylesheet" href="~/Dashboard/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Dashboard/assets/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="~/Dashboard/assets/plugins/fontawesome/css/fontawesome.min.css">
+    <link rel="stylesheet" href="~/Dashboard/assets/plugins/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="~/Dashboard/assets/css/style.css">
+    <link rel="stylesheet" href="~/Dashboard/assets/css/badehr-style.css" />
+
+    <style>
+        /* Bootstrap alert mesajları */
+        /* Kapatma butonunun genel görünümü */
+        .btn-close {
+            background-color: #f7f8f9;
+            border: 1px solid #000; /* Dış border rengi */
+            border-radius: 5px; /* Border kavisli yap */
+            margin-left: 20px;
+        }
+
+            /* Kapatma butonunun üzerine gelindiğinde */
+            .btn-close:hover {
+                background-color: white; /* Arka plan rengini şeffaf yap */
+                border-color: #000; /* Hover border rengini ayarla */
+            }
+
+            /* Kapatma butonunun içindeki çarpı işareti */
+            .btn-close::after {
+                content: "✖"; /* Çarpı işareti */
+                color: red; /* Çarpı işaretinin rengi */
+                font-size: 1rem; /* Çarpı işaretinin boyutu */
+            }
+
+        .btn-action-badehr:hover {
+            background-color: white;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="content container-fluid">
+        <div class="row">
+            <div class="col-xl-12 col-sm-12 col-12">
+                <div class="breadcrumb-path mb-4">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a asp-area="AdminPanel" asp-controller="Home" asp-action="Index"><img src="~/Dashboard/assets/img/dash.png" class="mr-2" />Admin</a>
+                        </li>
+                        <li class="breadcrumb-item active"> Companies</li>
+                    </ul>
+                    <h3>Companies</h3>
+                </div>
+            </div>
+
+            <div class="col-xl-12 col-sm-12 col-12 mb-4">
+                <div class="row">
+                    <div class="col-xl-10 col-sm-8 col-12 ">
+                        @if (Model.Count() == 1)
+                        {
+                            <label class="employee_count">@Model.Count() Company</label>
+                        }
+                        else
+                        {
+                            <label class="employee_count">@Model.Count() Companies</label>
+                        }
+                    </div>
+                    <div class="col-xl-2 col-sm-4 col-12 ">
+                        <a asp-area="AdminPanel" asp-controller="Company" asp-action="AddCompany" class="btn-create-badehr">Create New</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-12 col-sm-12 col-12 mb-4">
+                <div class="card">
+                    <div class="table-heading">
+                        <h2>Companies List</h2>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table  custom-table no-footer">
+                            <thead>
+                                <tr>
+                                    <th>Company Logo</th>
+                                    <th>Company Name</th>
+                                    <th>Company Title</th>
+                                    <th>E-mail</th>
+                                    <th>Phone Number</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            <div class="table-img">
+                                                <img src="@item.LogoPath" alt="Company Logo" class="img-table" />
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <label>@Html.DisplayFor(modelItem => item.CompanyName) </label>
+                                        </td>
+                                        <td>
+                                            <label>@Html.DisplayFor(modelItem => item.CompanyTitle) </label>
+                                        </td>
+                                        <td>
+                                            <label>@Html.DisplayFor(modelItem => item.Email)</label>
+                                        </td>
+                                        <td>
+                                            <label>@Html.DisplayFor(modelItem => item.PhoneNumber)</label>
+                                        </td>
+                                        <td>
+                                            <div class="actionset">
+                                                <label>
+                                                    <a asp-area="AdminPanel" asp-controller="Company" asp-action="GetCompanyDetail" asp-route-id="@item.CompanyID" style="font-size: 12px; color: #2F47BA; border: 1px solid #2F47BA; display: block; padding: 10px 15px; border-radius: 5px; text-decoration: none; position: relative;" class="btn-action-badehr">
+                                                        <span style="position: relative; top: 2px;">Details</span>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="orange" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px; stroke: #2F47BA; margin-left: 5px;">
+                                                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                                            <polyline points="14 2 14 8 20 8"></polyline>
+                                                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                                                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                                                            <polyline points="10 9 9 9 8 9"></polyline>
+                                                        </svg>
+                                                    </a>
+                                                </label>                                               
+
+                                                <label>
+                                                    <a asp-controller="Company" asp-action="DeleteCompany" asp-route-id="@item.CompanyID" onclick="return confirm('Are you sure you want to delete this company?');" style="font-size: 12px; color: #DC3545; border: 1px solid #DC3545; display: block; padding: 10px 15px; border-radius: 5px; text-decoration: none; position: relative;" class="btn-action-badehr">
+                                                        <span style="position: relative; top: 2px;">Delete</span>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="orange" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px; stroke: #DC3545; margin-left: 5px;">
+                                                            <polyline points="3 6 5 6 21 6"></polyline>
+                                                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                                            <line x1="10" y1="11" x2="10" y2="17"></line>
+                                                            <line x1="14" y1="11" x2="14" y2="17"></line>
+                                                        </svg>
+                                                    </a>
+                                                </label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@* <h1>ListCompany</h1>
+
+<p>
+    <a asp-action="Create" class="bn59">Create New</a>
+</p>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="@item.LogoPath" class="card-img-top" alt="Company Logo">
+                <div class="card-body">
+                    <h5 class="card-title">@item.CompanyName</h5>
+                    <p class="card-text"><strong>Title:</strong> @item.CompanyTitle</p>
+                    <p class="card-text"><strong>Phone:</strong> @item.PhoneNumber</p>
+                    <p class="card-text"><strong>Email:</strong> @item.Email</p>
+                    <div class="btn-group">
+                        <a href="@Url.Action("Edit", new { id = item.CompanyID })" class="bn39">Edit</a>
+                        <a href="@Url.Action("Details", new { id = item.CompanyID })" class="bn29">Details</a>
+                        <a href="@Url.Action("Delete", new { id = item.CompanyID })" class="bn49">Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<style>
+
+    a {
+        color: white;
+        background-color: white;
+    }
+
+        a:hover {
+            color: white;
+            background-color: white;
+        }
+
+    .card-body .bn29 {
+        display: inline-block;
+        border: none;
+        padding: 0.8em 2.5em;
+        outline: none;
+        color: white;
+        font-size: 1.2em;
+        position: relative;
+        z-index: 1;
+        cursor: pointer;
+        background: none;
+        text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.45);
+        margin-right: 0.5em;
+    }
+
+    .bn29:before,
+    .bn29:after {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        border-radius: 10em;
+        transform: translateX(-50%) translateY(-50%);
+        width: 105%;
+        height: 105%;
+        content: "";
+        z-index: -2;
+        background-size: 400% 400%;
+        background: linear-gradient(60deg, #66B6E1, #1098ad, #07b39b, #66B6E1, #07b39b, #1098ad, #07b39b, #66B6E1);
+    }
+
+
+    .bn29:before {
+        filter: blur(7px);
+        transition: all 0.25s ease;
+        animation: pulse 10s infinite ease;
+    }
+
+    .bn29:after {
+        filter: blur(0.3px);
+    }
+
+    .bn29:hover:before {
+        width: 115%;
+        height: 115%;
+    }
+
+
+    .card-body .bn39 {
+        display: inline-block;
+        border: none;
+        padding: 0.8em 2.5em;
+        outline: none;
+        color: white;
+        font-size: 1.2em;
+        position: relative;
+        z-index: 1;
+        cursor: pointer;
+        background: none;
+        text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.45);
+        margin-right: 0.5em;
+    }
+
+    .bn39:before,
+    .bn39:after {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        border-radius: 10em;
+        transform: translateX(-50%) translateY(-50%);
+        width: 105%;
+        height: 105%;
+        content: "";
+        z-index: -2;
+        background-size: 400% 400%;
+        background: linear-gradient(60deg, #E0AD3F, #E0D43F, #E1C240, #E0973F, #E0973F, #C9E03F, #E3D086, #E0AD3F);
+    }
+
+    .bn39:before {
+        filter: blur(7px);
+        transition: all 0.25s ease;
+        animation: pulse 10s infinite ease;
+    }
+
+    .bn39:after {
+        filter: blur(0.3px);
+    }
+
+    .bn39:hover:before {
+        width: 115%;
+        height: 115%;
+    }
+
+
+
+    .card-body .bn49 {
+        display: inline-block;
+        border: none;
+        padding: 0.8em 2.5em;
+        outline: none;
+        color: white;
+        font-size: 1.2em;
+        position: relative;
+        z-index: 1;
+        cursor: pointer;
+        background: none;
+        text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.45);
+        margin-right: 0.5em;
+    }
+
+    .bn49:before,
+    .bn49:after {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        border-radius: 10em;
+        transform: translateX(-50%) translateY(-50%);
+        width: 105%;
+        height: 105%;
+        content: "";
+        z-index: -2;
+        background-size: 400% 400%;
+        background: linear-gradient(60deg, #E02F34, #E05309,#E02500,#E0269B,#E08626,#E02500,#E05309,#E02F34 );
+    }
+
+    .bn49:before {
+        filter: blur(7px);
+        transition: all 0.25s ease;
+        animation: pulse 10s infinite ease;
+    }
+
+    .bn49:after {
+        filter: blur(0.3px);
+    }
+
+    .bn49:hover:before {
+        width: 115%;
+        height: 115%;
+    }
+
+
+
+    .bn59 {
+        display: inline-block;
+        border: none;
+        padding: 0.8em 2.5em;
+        outline: none;
+        color: white;
+        font-size: 1.2em;
+        position: relative;
+        z-index: 1;
+        cursor: pointer;
+        background: none;
+        text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.45);
+        margin-right: 0.5em;
+    }
+
+        .bn59:before,
+        .bn59:after {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            border-radius: 10em;
+            transform: translateX(-50%) translateY(-50%);
+            width: 105%;
+            height: 105%;
+            content: "";
+            z-index: -2;
+            background-size: 400% 400%;
+            background: linear-gradient(60deg,#112e0f,#112e0f, #112e0f,#112e0f,#9DE02D,#112e0f,#112e0f,#112e0f,#112e0f);
+        }
+
+        .bn59:before {
+            filter: blur(7px);
+            transition: all 0.25s ease;
+            animation: pulse 10s infinite ease;
+        }
+
+        .bn59:after {
+            filter: blur(0.3px);
+        }
+
+        .bn59:hover:before {
+            width: 115%;
+            height: 115%;
+        }
+
+</style>  *@

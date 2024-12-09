@@ -1,0 +1,191 @@
+﻿@model AddCompanyVM
+
+@{
+    ViewData["Title"] = "Add Company";
+    // Layout = "_AdminLayout";
+    var today = DateTime.Now.ToString("yyyy-MM-dd");
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="~/Dashboard/assets/css/badehr-style.css" />
+</head>
+
+<body>
+
+    <div class="content container-fluid">
+        <div class="row">
+            <div class="col-xl-12 col-sm-12 col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-titles">Add Company</h2>
+                    </div>
+
+                    <div class="form-creation">
+                        <form asp-area="AdminPanel" asp-controller="Company" asp-action="AddCompany" enctype="multipart/form-data">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            @if (TempData["AlertDepartment"] != null)
+                            {
+                                <div class="alert alert-danger" role="alert">
+                                    @TempData["AlertDepartment"]
+                                </div>
+                            }
+                            <div class="row">
+                                <div class="col-xl-4 col-sm-4 col-12">
+                                    <div class="form-group">
+                                        <label asp-for="@Model.AddCompanyFormDTO.CompanyName" class="control-label">Company Name <span class="mandatory">*</span></label>
+                                        <input asp-for="@Model.AddCompanyFormDTO.CompanyName" class="form-control" />
+                                        <span asp-validation-for="@Model.AddCompanyFormDTO.CompanyName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-sm-4 col-12">
+                                    <div class="form-group">
+                                        <label asp-for="@Model.AddCompanyFormDTO.CompanyTitle" class="control-label">Company Title <span class="mandatory">*</span></label>
+                                        <input asp-for="@Model.AddCompanyFormDTO.CompanyTitle" class="form-control" />
+                                        <span asp-validation-for="@Model.AddCompanyFormDTO.CompanyTitle" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-sm-4 col-12">
+                                    <div class="form-group">
+                                        <label asp-for="@Model.AddCompanyFormDTO.MersisNo" class="control-label">Mersis No <span class="mandatory">*</span></label>
+                                        <input asp-for="@Model.AddCompanyFormDTO.MersisNo" class="form-control" placeholder="i.e. 1234567890123456" />
+                                        <span asp-validation-for="@Model.AddCompanyFormDTO.MersisNo" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xl-4 col-sm-4 col-12">
+                                    <div class="form-group">
+                                        <label asp-for="@Model.AddCompanyFormDTO.TaxNo" class="control-label">Tax No <span class="mandatory">*</span></label>
+                                        <input asp-for="@Model.AddCompanyFormDTO.TaxNo" class="form-control" placeholder="i.e. 1234567890" />
+                                        <span asp-validation-for="@Model.AddCompanyFormDTO.TaxNo" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-sm-4 col-12">
+                                    <div class="form-group">
+                                        <label asp-for="@Model.AddCompanyFormDTO.TaxOffice" class="control-label">Tax Office <span class="mandatory">*</span></label>
+                                        <input asp-for="@Model.AddCompanyFormDTO.TaxOffice" class="form-control" />
+                                        <span asp-validation-for="@Model.AddCompanyFormDTO.TaxOffice" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-sm-4 col-12">
+                                    <div class="form-group">
+                                        <label asp-for="@Model.AddCompanyFormDTO.Logo" class="control-label"></label>
+                                        <input asp-for="@Model.AddCompanyFormDTO.Logo" type="file" class="form-control" style="height:70px"/>
+                                        <span asp-validation-for="@Model.AddCompanyFormDTO.Logo" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xl-4 col-sm-4 col-12">
+                                    <div class="form-group">
+                                        <label asp-for="@Model.AddCompanyFormDTO.PhoneNumber" class="control-label">Phone Number <span class="mandatory">*</span></label>
+                                        <input asp-for="@Model.AddCompanyFormDTO.PhoneNumber" class="form-control" placeholder="i.e. 2223334455" />
+                                        <span asp-validation-for="@Model.AddCompanyFormDTO.PhoneNumber" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-4 col-sm-4 col-12">
+                                    <div class="form-group">
+                                        <label asp-for="@Model.AddCompanyFormDTO.Email" class="control-label">Email <span class="mandatory">*</span></label>
+                                        <input asp-for="@Model.AddCompanyFormDTO.Email" class="form-control" placeholder="i.e. example@example.c" />
+                                        <span asp-validation-for="@Model.AddCompanyFormDTO.Email" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-4 col-sm-4 col-12">
+                                    <div class="form-group">
+                                        <label asp-for="@Model.AddCompanyFormDTO.EmployeeCount" class="control-label">Employee Count</label>
+                                        <input asp-for="@Model.AddCompanyFormDTO.EmployeeCount" type="number" min="1" class="form-control" style="height:70px" />
+                                        <span asp-validation-for="@Model.AddCompanyFormDTO.EmployeeCount" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xl-4 col-sm-4 col-12">
+                                    <div class="form-group">
+                                        <label asp-for="@Model.AddCompanyFormDTO.FoundationDate" class="control-label">Foundation Date <span class="mandatory">*</span></label>
+                                        <input asp-for="@Model.AddCompanyFormDTO.FoundationDate" class="form-control" max="@today" type="date" style="height: 70px;" />
+                                        <span asp-validation-for="@Model.AddCompanyFormDTO.FoundationDate" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-sm-4 col-12">
+                                    <div class="form-group">
+                                        <label asp-for="@Model.AddCompanyFormDTO.ContractStartDate" class="control-label">Contract Start Date <span class="mandatory">*</span></label>
+                                        <input asp-for="@Model.AddCompanyFormDTO.ContractStartDate" class="form-control" min="@today" type="date" style="height: 70px;" />
+                                        <span asp-validation-for="@Model.AddCompanyFormDTO.ContractStartDate" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-sm-4 col-12">
+                                    <div class="form-group">
+                                        <label asp-for="@Model.AddCompanyFormDTO.ContractExpirationDate" class="control-label">Contract Expiration Date <span class="mandatory">*</span></label>
+                                        <input asp-for="@Model.AddCompanyFormDTO.ContractExpirationDate" class="form-control" min="@today" type="date" style="height: 70px;" />
+                                        <span asp-validation-for="@Model.AddCompanyFormDTO.ContractExpirationDate" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xl-6 col-sm-6 col-12">
+                                    <div class="form-group">
+                                        <label asp-for="@Model.AddCompanyFormDTO.Address" class="control-label">Address <span class="mandatory">*</span></label>
+                                        <input asp-for="@Model.AddCompanyFormDTO.Address" class="form-control" />
+                                        <span asp-validation-for="@Model.AddCompanyFormDTO.Address" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-6 col-sm-6 col-12" >
+                                    <div class="form-group">
+
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <label style="margin-bottom: 6px;">Department Name <span class="mandatory">*</span></label>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="form-control" style="height: 70px;">
+                                                @for (int i = 0; i < Model.SelectedDepartments.Count; i++)
+                                                {
+                                                    
+                                                        <td><input type="checkbox" asp-for="@Model.SelectedDepartments[i].IsSelected" /></td>
+                                                <td>@Model.SelectedDepartments[i].DepartmentName &nbsp;&nbsp;</td>
+
+                                                        <input type="hidden" asp-for="@Model.SelectedDepartments[i].DepartmentID" />
+                                                        <input type="hidden" asp-for="@Model.SelectedDepartments[i].DepartmentName" />
+
+                                                    
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xl-12 col-sm-12 col-12">
+                                    <div class="form-btn">
+                                        <button type="submit" class="btn btn-apply">Create</button>
+                                        <a asp-area="AdminPanel" asp-controller="Company" asp-action="ListCompany" class="btn btn-secondary cancel-badehr">Cancel</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+@* @section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+} *@

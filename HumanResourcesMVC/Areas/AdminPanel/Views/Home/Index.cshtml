@@ -1,0 +1,273 @@
+﻿@using HumanResourcesMVC.Models.ViewModels.User.Admin
+@using HumanResourcesMVC.Models.ViewModels.User.Employee
+@model AdminIndexVM
+
+@{
+    Layout = "_AdminLayout";
+    var culture = new System.Globalization.CultureInfo("en-US");
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="~/Dashboard/assets/css/badehr-style.css" />
+    
+    <style>
+        .mail-warning{
+           
+            justify-content: center;
+            flex-wrap: wrap;
+            display: flex;
+            width: 100%;
+            font-size: 70px;
+            color: wheat;
+            background-color: red;
+            padding: 10px;
+            border-radius: 5px;
+
+        }
+
+        .w-btn{
+            width: 145px;
+        }
+
+        .admin-summary {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            padding: 20px;
+            margin-top: 20px; /* Adjust as needed to prevent overflow */
+        }
+
+        .card_widget_header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .admin-photo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-right: 20px;
+        }
+
+        .admin-name {
+            font-size: 2em;
+            margin: 0;
+        }
+
+        .admin-role {
+            font-size: 1.2em;
+            color: #888;
+        }
+
+        .admin-details p {
+            margin: 10px 0;
+            font-size: 1.1em;
+        }
+
+            .admin-details p strong {
+                display: inline-block;
+                width: 120px;
+            }
+
+        .row.mb-4.justify-content-center {
+            display: flex;
+            justify-content: center;
+        }
+
+        .profile-button-wrapper {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .profile-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+            .profile-button:hover {
+                background-color: #0056b3;
+                color: white;
+            }
+            
+        .button-section {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+
+            
+    </style>
+
+   
+</head>
+<body>
+    <div class="content container-fluid">
+        <div class="page-name mb-4">
+            <h4 class="m-0">
+                <img src="@Model.User.ImagePath" class="mr-1" alt="profile" />
+                Welcome @Model.User.Name
+            </h4>
+            <label>@DateTime.Now.ToString("dddd, dd MMM yyyy", culture)</label>
+
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card board1 fill1">
+                    <div class="card-body">
+                        <div class="card_widget_header">
+                            <h4>Admin Panel</h4>
+                        </div>
+                        <div class="card_widget_img">
+                            <img src="~/Dashboard/assets/img/dash1.png" alt="card-img" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4 justify-content-between">
+            <div class="col-xl-4 col-lg-4 col-sm-6 col-12">
+                <div class="card board1 fill2">
+                    <div class="card-body">
+                        <div class="card_widget_header" style="height:52px;">
+                            <label>Employees</label>&nbsp;&nbsp;
+                            <h4> @Model.EmployeeCount</h4>
+                        </div>
+                        <div class="card_widget_img">
+                            <img src="~/Dashboard/assets/img/dash1.png" alt="card-img" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-4 col-sm-6 col-12">
+                <div class="card board1 fill3" style="background-color: #28a745;">
+                    <div class="card-body">
+                        <div class="card_widget_header" style="height:52px;">
+                            <label>Directors</label>&nbsp;&nbsp;
+                            <h4> @Model.DirectorCount</h4>
+                        </div>
+                        <div class="card_widget_img">
+                            <img src="~/Dashboard/assets/img/dash1.png" alt="card-img" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-4 col-sm-6 col-12">
+                <div class="card board1 fill3">
+                    <div class="card-body">
+                        <div class="card_widget_header">
+                            <label>Companies</label>&nbsp;&nbsp;
+                            <h4> @Model.CompanyCount</h4>
+                        </div>
+                        <div class="card_widget_img">
+                            <img src="~/Dashboard/assets/img/dash2.png" alt="card-img" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @if (TempData["MailControl"] != null)
+        {
+
+            <div class="mail-warning">
+                @TempData["MailControl"]
+            </div>
+            <div class="alert alert-danger" role="alert">
+               <h3>Try Again</h3>
+            </div>
+        }
+
+        <div class="row mb-4 justify-content-center">
+            <div class="col-xl-6 col-lg-8 col-md-10 col-sm-12">
+                <div class="card admin-summary">
+                    <div class="card-body">
+                        <div class="card_widget_header">
+                            <img src="@Model.User.ImagePath" class="admin-photo" alt="Admin Photo" />
+                            <div>
+                                <label class="admin-role">@Model.User.Name</label>
+                            </div>
+                        </div>
+                        <div class="admin-details">
+                            <p><strong>Email:</strong>@Model.User.Email</p>
+                            <p><strong>Phone:</strong>@Model.User.PhoneNumber</p>
+                            <p><strong>Adres:</strong>@Model.User.Address</p>
+                            <p><strong>Job:</strong>@Model.User.JobName</p>
+                            <p><strong>Department:</strong>@Model.User.JobName</p>
+                        </div>
+                        <div class="profile-button-wrapper">
+                            <a asp-area="AdminPanel" asp-controller="Home" asp-action="Detail" asp-route-id="@Model.User.Id" class="profile-button">Profile</a>
+                        </div>
+                    </div>
+                </div>
+
+             
+
+                <div class="button-section">
+                    <a asp-area="AdminPanel" asp-controller="Company" asp-action="AddCompany" class="btn-create-badehr w-btn">Add Company</a>
+                    <a asp-area="AdminPanel" asp-controller="Company" asp-action="ListCompany" class="btn-view-badehr w-btn">List Companies</a>
+                    <a asp-area="AdminPanel" asp-controller="Director" asp-action="AddDirector" class="btn-create-badehr w-btn">Add Director</a>
+                    <a asp-area="AdminPanel" asp-controller="Director" asp-action="ListDirector" class="btn-view-badehr w-btn">List Directors</a>
+                    <!--<a class="btn-create-badehr w-btn" data-toggle="modal" data-target="#adddirector">Add Director</a>-->
+                </div>
+
+                <!--<div class="customize_popup">
+                    <div class="modal fade" id="adddirector" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="staticBackdropLabel">Add Director Information</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                @await Component.InvokeAsync("AddDirector")
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="customize_popup">
+                    <div class="modal fade" id="addcompany" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="staticBackdropLabel">Add Company Information</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                @await Component.InvokeAsync("AddCompany")
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+
+            </div>
+        </div>
+
+
+    </div>
+</body>
+</html>
+
+

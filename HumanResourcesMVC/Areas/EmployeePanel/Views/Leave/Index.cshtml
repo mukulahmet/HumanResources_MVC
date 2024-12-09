@@ -1,0 +1,75 @@
+﻿@model HumanResourcesMVC.Areas.EmployeePanel.Models.Leave.AddLeaveVM
+
+@{
+    ViewData["Title"] = "NewLeave";
+    // Layout = "_AdminLayout";
+    var today = DateTime.Now.ToString("yyyy-MM-dd");
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="~/Dashboard/assets/css/badehr-style.css" />
+
+</head>
+<body>
+    <div class="content container-fluid">
+        <div class="row">
+            <div class="col-xl-12 col-sm-12 col-12 ">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-titles">New Leave</h2>
+                    </div>
+                    <div class="form-creation">
+                        <form asp-area="EmployeePanel" asp-action="Index" asp-controller="Leave" enctype="multipart/form-data">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="row">
+                                <div class="col-xl-4 col-sm-4 col-12 ">
+                                    <div class="form-group">
+                                        <label asp-for="LeaveType">Leave Type <span class="mandatory">*</span> </label>
+                                        <select asp-for="LeaveType" class="select">
+                                            <option value="1">Annual Leave</option>
+                                            <option value="2">Pregnancy Leave</option>
+                                            <option value="3">Paid Leave</option>
+                                            <option value="4">UnPaid Leave</option>
+                                        </select>
+                                        <span asp-validation-for="LeaveType" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-sm-4 col-12 ">
+                                        <div class="form-group">
+                                        <label asp-for="LeaveStartDate" class="control-label">Leave Start Date <span class="mandatory">*</span></label>
+                                        <input asp-for="LeaveStartDate" type="date" min="@today" class="form-control" style="height:70px" />
+                                        <span asp-validation-for="LeaveStartDate" class="text-danger"></span>
+                                        </div>
+                                </div>
+
+                                <div class="col-xl-4 col-sm-4 col-12 ">
+                                    <div class="form-group">
+                                        <label asp-for="LeaveEndDate" class="control-label">Leave End Date <span class="mandatory">*</span></label>
+                                        <input asp-for="LeaveEndDate" class="form-control" min="@today" type="date" style="height:70px" />
+                                        <span asp-validation-for="LeaveEndDate" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>                         
+
+                            <div class="row">
+                                <div class="col-xl-12 col-sm-12 col-12 ">
+                                    <div class="form-btn">
+                                        <button type="submit" class="btn btn-apply">Apply</button>
+                                        <a asp-area="EmployeePanel" asp-controller="Leave" asp-action="ListLeave" class="btn btn-secondary cancel-badehr">Cancel</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

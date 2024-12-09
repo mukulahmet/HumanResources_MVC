@@ -1,0 +1,202 @@
+﻿@{
+	string targetUrl;
+	string panelName;
+
+	var userRole = Context.Session.GetString("userRole");
+
+	if (userRole == "Admin")
+	{
+		targetUrl = Url.Action("Index", "Home", new { area = "AdminPanel" });
+		panelName = "Admin Panel";
+	}
+	else if (userRole == "Director")
+	{
+		targetUrl = Url.Action("Index", "Home", new { area = "DirectorPanel" });
+		panelName = "Director Panel";
+	}
+	else
+	{
+		targetUrl = Url.Action("Index", "Home", new { area = "EmployeePanel" });
+		panelName = "Employee Panel";
+	}
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+	<title>BADE HR - Human Resources</title>
+
+	<link rel="shortcut icon" href="~/Dashboard/assets/img/favicon.png">
+
+	<link rel="stylesheet" href="~/Dashboard/assets/css/bootstrap.min.css">
+
+	<link rel="stylesheet" href="~/Dashboard/assets/plugins/fontawesome/css/fontawesome.min.css">
+	<link rel="stylesheet" href="~/Dashboard/assets/plugins/fontawesome/css/all.min.css">
+
+	<link rel="stylesheet" href="~/Dashboard/assets/css/style.css">
+	<!--[if lt IE 9]>
+				<script src="assets/js/html5shiv.min.js"></script>
+				<script src="assets/js/respond.min.js"></script>
+			<![endif]-->
+</head>
+<body>
+
+	<div class="main-wrapper">
+
+		<div class="header">
+
+			<div class="header-left">
+
+				<a asp-area="" asp-controller="Home" asp-action="Index" class="logo">
+					<h2 style="margin-top: 10px;">BADE HR</h2>
+				</a>
+
+				<a href="index.html" class="logo logo-small">
+					<h3 style="margin-top: 14px;">BH</h3>
+				</a>
+
+				<a href="javascript:void(0);" id="toggle_btn">
+					<span class="bar-icon">
+						<span></span>
+						<span></span>
+						<span></span>
+					</span>
+				</a>
+			</div>
+		</div>
+
+
+		<div class="sidebar" id="sidebar">
+			<div class="sidebar-inner slimscroll">
+				<div class="sidebar-contents">
+					<div id="sidebar-menu" class="sidebar-menu">
+						<div class="mobile-show">
+							<div class="offcanvas-menu">
+								<div class="user-info align-center bg-theme text-center">
+									<span class="lnr lnr-cross  text-white" id="mobile_btn_close">X</span>
+									<a href="javascript:void(0)" class="d-block menu-style text-white">
+										<div class="user-avatar d-inline-block mr-3">
+											<img src="~/Dashboard/assets/img/profiles/avatar-18.jpg" alt="user avatar" class="rounded-circle" width="50">
+										</div>
+									</a>
+								</div>
+							</div>
+							<div class="sidebar-input">
+								<div class="top-nav-search">
+									<form>
+										<input type="text" class="form-control" placeholder="Search here">
+										<button class="btn" type="submit"><i class="fas fa-search"></i></button>
+									</form>
+								</div>
+							</div>
+						</div>
+						<ul>
+							<li>
+								<a href="@targetUrl">
+									<img src="~/Dashboard/assets/img/home.svg" alt="sidebar_img">
+									<span>@panelName</span>
+								</a>
+							</li>
+
+							@if (userRole == "Admin")
+							{
+								<li>
+									<a asp-area="AdminPanel" asp-controller="Director" asp-action="ListDirector"><img src="~/Dashboard/assets/img/employee.svg" alt="sidebar_img"><span> Director</span></a>
+								</li>
+								<li>
+									<a asp-area="AdminPanel" asp-controller="Company" asp-action="ListCompany"> <img src="~/Dashboard/assets/img/company.svg" alt="sidebar_img"> <span> Company</span></a>
+								</li>
+							}
+
+							@if (userRole == "Employee")
+							{
+								<li>
+									<a asp-area="EmployeePanel" asp-controller="Leave" asp-action="ListLeave"><img src="~/Dashboard/assets/img/leave.svg" alt="sidebar_img"> <span>Leave</span></a>
+								</li>
+								<li>
+									<a asp-area="EmployeePanel" asp-controller="Expense" asp-action="ListExpense"><img src="~/Dashboard/assets/img/dollar.svg" alt="sidebar_img"> <span>Expense</span></a>
+								</li>
+								<li>
+									<a asp-area="EmployeePanel" asp-controller="Advance" asp-action="AdvanceList"><img src="~/Dashboard/assets/img/wallet.svg" alt="sidebar_img"> <span>Advance</span></a>
+								</li>
+							}
+
+							@if (userRole == "Director")
+							{
+								<li>
+									<a asp-area="DirectorPanel" asp-controller="Leave" asp-action="ListLeave"><img src="~/Dashboard/assets/img/leave.svg" alt="sidebar_img"> <span>Leave Requests</span></a>
+								</li>
+								<li>
+									<a asp-area="DirectorPanel" asp-controller="Expense" asp-action="ListExpense"><img src="~/Dashboard/assets/img/dollar.svg" alt="sidebar_img"> <span>Expense Requests</span></a>
+								</li>
+								<li>
+									<a asp-area="DirectorPanel" asp-controller="Advance" asp-action="ListAdvance"><img src="~/Dashboard/assets/img/wallet.svg" alt="sidebar_img"> <span>Advance Requests</span></a>
+								</li>
+							}
+
+							<!--<li>
+								<a href="settings.html"><img src="~/Dashboard/assets/img/settings.svg" alt="sidebar_img"><span>Settings</span></a>
+							</li>
+							<li>
+								<a href="profile.html"><img src="~/Dashboard/assets/img/profile.svg" alt="sidebar_img"> <span>Profile</span></a>
+							</li>-->
+
+						</ul>
+						<ul class="logout">
+							<li>
+								<a asp-area="" asp-controller="Login" asp-action="Logout"><img src="~/Dashboard/assets/img/logout.svg" alt="sidebar_img"><span>Log out</span></a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="page-wrapper">
+			@RenderBody()
+		</div>
+		
+
+	</div>
+
+		<script src="~/Dashboard/assets/js/jquery-3.6.0.min.js"></script>
+
+	<script src="~/Dashboard/assets/js/popper.min.js"></script>
+	<script src="~/Dashboard/assets/js/bootstrap.min.js"></script>
+
+	<script src="~/Dashboard/assets/js/feather.min.js"></script>
+
+	<script src="~/Dashboard/assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+	<script src="~/Dashboard/assets/plugins/apexchart/apexcharts.min.js"></script>
+	<script src="~/Dashboard/assets/plugins/apexchart/chart-data.js"></script>
+
+	<script src="~/Dashboard/assets/js/script.js"></script>
+
+	<!--Sidebar'da tıklanan sekmenin seçili olduğu anlaşılsın diye sekmenin arkaplanını koyu gri yapar-->
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+			const currentUrl = window.location.href;
+			const listItems = document.querySelectorAll('ul > li');
+
+			listItems.forEach(function (item) {
+				const link = item.querySelector('a');
+				if (link && link.href === currentUrl) {
+					item.classList.add('active');
+				}
+			});
+
+			listItems.forEach(function (item) {
+				item.addEventListener('click', function () {
+					listItems.forEach(function (li) {
+						li.classList.remove('active');
+					});
+					item.classList.add('active');
+				});
+			});
+		});
+	</script>
+
+</body>
+</html>

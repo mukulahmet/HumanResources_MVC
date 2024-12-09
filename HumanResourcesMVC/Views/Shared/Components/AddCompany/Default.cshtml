@@ -1,0 +1,102 @@
+﻿@using HumanResourcesMVC.Models.ViewModels.Company
+@model AddCompanyVM
+
+<form asp-area="AdminPanel" asp-controller="Company" asp-action="AddCompany" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="col-md-12 p-0">
+        <div class="form-popup">
+            <label asp-for="@Model.AddCompanyFormDTO.CompanyName" class="control-label"></label>
+            <input asp-for="@Model.AddCompanyFormDTO.CompanyName" class="form-control" />
+            <span asp-validation-for="@Model.AddCompanyFormDTO.CompanyName" class="text-danger"></span>
+        </div>
+        <div class="form-popup">
+            <label asp-for="@Model.AddCompanyFormDTO.CompanyTitle" class="control-label"></label>
+            <input asp-for="@Model.AddCompanyFormDTO.CompanyTitle" class="form-control" />
+            <span asp-validation-for="@Model.AddCompanyFormDTO.CompanyTitle" class="text-danger"></span>
+        </div>
+        <div class="form-popup">
+            <label asp-for="@Model.AddCompanyFormDTO.MersisNo" class="control-label"></label>
+            <input asp-for="@Model.AddCompanyFormDTO.MersisNo" class="form-control" />
+            <span asp-validation-for="@Model.AddCompanyFormDTO.MersisNo" class="text-danger"></span>
+        </div>
+        <div class="form-popup">
+            <label asp-for="@Model.AddCompanyFormDTO.TaxNo" class="control-label"></label>
+            <input asp-for="@Model.AddCompanyFormDTO.TaxNo" class="form-control" />
+            <span asp-validation-for="@Model.AddCompanyFormDTO.TaxNo" class="text-danger"></span>
+        </div>
+        <div class="form-popup">
+            <label asp-for="@Model.AddCompanyFormDTO.TaxOffice" class="control-label"></label>
+            <input asp-for="@Model.AddCompanyFormDTO.TaxOffice" class="form-control" />
+            <span asp-validation-for="@Model.AddCompanyFormDTO.TaxOffice" class="text-danger"></span>
+        </div>
+        <div class="form-popup">
+            <label asp-for="@Model.AddCompanyFormDTO.Logo" class="control-label"></label>
+            <input asp-for="@Model.AddCompanyFormDTO.Logo" type="file" class="form-control" />
+            <span asp-validation-for="@Model.AddCompanyFormDTO.Logo" class="text-danger"></span>
+        </div>
+        <div class="form-popup">
+            <label asp-for="@Model.AddCompanyFormDTO.PhoneNumber" class="control-label"></label>
+            <input asp-for="@Model.AddCompanyFormDTO.PhoneNumber" class="form-control" />
+            <span asp-validation-for="@Model.AddCompanyFormDTO.PhoneNumber" class="text-danger"></span>
+        </div>
+        <div class="form-popup">
+            <label asp-for="@Model.AddCompanyFormDTO.Address" class="control-label"></label>
+            <input asp-for="@Model.AddCompanyFormDTO.Address" class="form-control" />
+            <span asp-validation-for="@Model.AddCompanyFormDTO.Address" class="text-danger"></span>
+        </div>
+        <div class="form-popup">
+            <label asp-for="@Model.AddCompanyFormDTO.Email" class="control-label"></label>
+            <input asp-for="@Model.AddCompanyFormDTO.Email" class="form-control" />
+            <span asp-validation-for="@Model.AddCompanyFormDTO.Email" class="text-danger"></span>
+        </div>
+        <div class="form-popup">
+            <label asp-for="@Model.AddCompanyFormDTO.EmployeeCount" class="control-label"></label>
+            <input asp-for="@Model.AddCompanyFormDTO.EmployeeCount" class="form-control" />
+            <span asp-validation-for="@Model.AddCompanyFormDTO.EmployeeCount" class="text-danger"></span>
+        </div>
+        <div class="form-popup">
+            <label asp-for="@Model.AddCompanyFormDTO.FoundationDate" class="control-label"></label>
+            <input asp-for="@Model.AddCompanyFormDTO.FoundationDate" class="form-control" />
+            <span asp-validation-for="@Model.AddCompanyFormDTO.FoundationDate" class="text-danger"></span>
+        </div>
+        <div class="form-popup">
+            <label asp-for="@Model.AddCompanyFormDTO.ContractStartDate" class="control-label"></label>
+            <input asp-for="@Model.AddCompanyFormDTO.ContractStartDate" class="form-control" />
+            <span asp-validation-for="@Model.AddCompanyFormDTO.ContractStartDate" class="text-danger"></span>
+        </div>
+        <div class="form-popup">
+            <label asp-for="@Model.AddCompanyFormDTO.ContractExpirationDate" class="control-label"></label>
+            <input asp-for="@Model.AddCompanyFormDTO.ContractExpirationDate" class="form-control" />
+            <span asp-validation-for="@Model.AddCompanyFormDTO.ContractExpirationDate" class="text-danger"></span>
+        </div>
+        <div class="form-popup">
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Department Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.SelectedDepartments.Count; i++)
+                    {
+                        <tr>
+                            <td><input type="checkbox" asp-for="@Model.SelectedDepartments[i].IsSelected" /></td>
+                            <td>@Model.SelectedDepartments[i].DepartmentName</td>
+
+                            <input type="hidden" asp-for="@Model.SelectedDepartments[i].DepartmentID" />
+                            <input type="hidden" asp-for="@Model.SelectedDepartments[i].DepartmentName" />
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Create</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,148 @@
+﻿@model DetailCompanyVM
+
+@{
+    ViewData["Title"] = "Detail Company";
+    // Layout = "_AdminLayout";
+}
+
+<div class="content container-fluid">
+    <div class="page-name 	mb-4">
+        <h4 class="m-0"><img src="@Model.LogoPath" class="mr-1" alt="Company Logo" /> @Model.CompanyName</h4>
+        <label></label>
+    </div>
+
+    <div class="row mb-2">
+        <div class="col-12">
+            <div class="card board1 fill1">
+                <div class="card-body">
+                    <div class="card_widget_header">
+                        <h4>Company Details</h4>
+                    </div>
+                    <div class="card_widget_img">
+                        <img src="~/Dashboard/assets/img/dash1.png" alt="card-img" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="content container-fluid">
+        <div class="row mb-4 justify-content-center">
+            <div class="col-xl-8 col-lg-10 col-md-12 col-sm-12">
+                <div class="card admin-summary mx-auto">
+                    <div class="card-body">
+                        <div class="card_widget_header">
+                            <img src="@Model.LogoPath" class="admin-photo" alt="Company Logo" />
+                        </div>
+                        <div class="admin-details">
+                            <p><strong>Company Name:</strong>@Model.CompanyName</p>
+                            <p><strong>Company Title:</strong>@Model.CompanyTitle</p>
+                            <p><strong>Mersis No:</strong>@Model.MersisNo</p>
+                            <p><strong>Tax No:</strong>@Model.TaxNo</p>
+                            <p><strong>Tax Office:</strong>@Model.TaxOffice</p>
+                            <p><strong>Phone Number:</strong>@Model.PhoneNumber</p>
+                            <p><strong>Address:</strong>@Model.Address</p>
+                            <p><strong>Email:</strong>@Model.Email</p>
+                            <p><strong>Employee Count:</strong>@Model.EmployeeCount</p>
+                            <p><strong>Foundation Date:</strong>@Model.FoundationDate.ToString("dd.MM.yyyy")</p>
+                            <p><strong>Contract Start Date:</strong>@(Model.ContractStartDate?.ToString("dd.MM.yyyy") ?? "")</p>
+                            <p><strong>Contract Expiration Date:</strong>@(Model.ContractExpirationDate?.ToString("dd.MM.yyyy") ?? "")</p>
+                        </div>
+                        <div class="profile-button-wrapper">
+                            @* <a asp-area="AdminPanel" asp-controller="Home" asp-action="Update" asp-route-id="@Model.Id" class="profile-button">Update</a> *@
+                            <a asp-area="AdminPanel" asp-controller="Company" asp-action="ListCompany" class="back-button">Back</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <style>
+            .admin-summary {
+                border: 1px solid #ddd;
+                border-radius: 10px;
+                background-color: #fff;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                overflow: hidden;
+                padding: 20px;
+            }
+
+            .card_widget_header {
+                display: flex;
+                align-items: center;
+                margin-bottom: 20px;
+            }
+
+            .admin-photo {
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                margin-right: 20px;
+            }
+
+            .admin-name {
+                font-size: 2em;
+                margin: 0;
+            }
+
+            .admin-role {
+                font-size: 1.2em;
+                color: #888;
+            }
+
+            .admin-details p {
+                margin: 10px 0;
+                font-size: 1.1em;
+            }
+
+                .admin-details p strong {
+                    display: inline-block;
+                    width: 160px;
+                }
+
+            .row.mb-4.justify-content-center {
+                display: flex;
+                justify-content: center;
+            }
+
+            .profile-button-wrapper {
+                text-align: center;
+                margin-top: 20px;
+            }
+
+            .profile-button {
+                background-color: #007bff;
+                color: #fff;
+                border: none;
+                border-radius: 5px;
+                padding: 10px 20px;
+                font-size: 1.1em;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+
+                .profile-button:hover {
+                    background-color: #0056b3;
+                    color: white;
+                }
+
+            .back-button {
+                background-color: #DC3545;
+                color: #fff;
+                border: none;
+                border-radius: 5px;
+                padding: 10px 20px;
+                font-size: 1.1em;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+
+                .back-button:hover {
+                    background-color: #a92835;
+                    color: white;
+                }
+        </style>
+    </div>
+</div>
+

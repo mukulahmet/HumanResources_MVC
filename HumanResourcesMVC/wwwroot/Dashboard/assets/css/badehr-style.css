@@ -1,0 +1,113 @@
+﻿/* Create işlemleri için standart renk */
+a.btn-create-badehr {
+    padding: 23px 10px;
+    display: block;
+    box-shadow: 0 4px 10px 0 rgb(137 137 137 / 25%);
+    text-align: center;
+    background-color: #00882E;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 20px;
+    margin: 0 5px;
+    border: 1px solid #00882E;
+    font-weight: bold;
+}
+
+    a.btn-create-badehr.active,
+    a.btn-create-badehr:hover {
+        background-color: #fff;
+        color: #00882E;
+    }
+
+/* Düzenleme işlemleri için standart renk */
+a.btn-edit-badehr {
+    padding: 23px 10px;
+    display: block;
+    box-shadow: 0 4px 10px 0 rgb(137 137 137 / 25%);
+    text-align: center;
+    background-color: #FF8D07;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 20px;
+    margin: 0 5px;
+    border: 1px solid #FF8D07;
+    font-weight: bold;
+}
+
+    a.btn-edit-badehr.active,
+    a.btn-add-badehr:hover {
+        background-color: #fff;
+        color: #FF8D07;
+    }
+
+/* Silme işlemleri için standart renk */
+a.btn-delete-badehr {
+    padding: 23px 10px;
+    display: block;
+    box-shadow: 0 4px 10px 0 rgb(137 137 137 / 25%);
+    text-align: center;
+    background-color: #DC3545;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 20px;
+    margin: 0 5px;
+    border: 1px solid #DC3545;
+}
+
+    a.btn-delete-badehr.active,
+    a.btn-delete-badehr:hover {
+        background-color: #fff;
+        color: #DC3545;
+    }
+
+/* Görüntüleme/listeleme işlemleri için standart renk */
+a.btn-view-badehr {
+    padding: 23px 10px;
+    display: block;
+    box-shadow: 0 4px 10px 0 rgb(137 137 137 / 25%);
+    text-align: center;
+    background-color: #2F47BA;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 20px;
+    margin: 0 5px;
+    border: 1px solid #2F47BA;
+    font-weight: bold;
+}
+
+    a.btn-view-badehr.active,
+    a.btn-view-badehr:hover {
+        background-color: #fff;
+        color: #2F47BA;
+    }
+
+/* Ekstra işlemler için standart renk sınıfları */
+.blue-badehr {
+    background-color: #2F47BA;
+}
+
+.orange-badehr {
+    background-color: #FF8D07;
+}
+
+.red-badehr {
+    background-color: #DC3545;
+}
+
+.green-badehr {
+    background-color: #00882E;
+}
+
+/* Cancel anchor tag */
+a.cancel-badehr {
+    position: absolute;
+    z-index: 0;
+    left: 160px;
+    top: 0px;
+    display: flex;
+    align-items: center; /* Dikeyde ortalar */
+    justify-content: center; /* Yatayda ortalar */
+    height: 50px;
+    text-align: center;
+    /* Diğer stil özellikleri */
+}

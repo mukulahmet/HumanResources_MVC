@@ -1,0 +1,169 @@
+﻿@using HumanResourcesMVC.Models.ViewModels.User.Director
+@model AddDirectorVM
+
+@{
+    ViewData["Title"] = "Add Director";
+    // Layout = "_AdminLayout";
+
+    // Tarih hesaplama
+    var maxDate = DateTime.Now.AddYears(-18).ToString("yyyy-MM-dd");
+    var minDate = DateTime.Now.ToString("yyyy-MM-dd");
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="~/Dashboard/assets/css/badehr-style.css" />
+</head>
+
+<body>
+    <div class="content container-fluid">
+        <div class="row">
+            <div class="col-xl-12 col-sm-12 col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-titles">Add Director</h2>
+                    </div>
+
+                    <div class="form-creation">
+                        <form asp-area="AdminPanel" asp-controller="Director" asp-action="AddDirector" enctype="multipart/form-data">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="row">
+                                <div class="col-xl-4 col-sm-4 col-12">
+                                    <div class="form-group">
+                                        <label asp-for="@Model.addDirectorFormDTO.Name" class="control-label">Name <span class="mandatory">*</span></label>
+                                        <input asp-for="@Model.addDirectorFormDTO.Name" class="form-control" />
+                                        <span asp-validation-for="@Model.addDirectorFormDTO.Name" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-sm-4 col-12">
+                                    <div class="form-group">
+                                        <label asp-for="@Model.addDirectorFormDTO.SecondName" class="control-label">Second Name</label>
+                                        <input asp-for="@Model.addDirectorFormDTO.SecondName" class="form-control" />
+                                        <span asp-validation-for="@Model.addDirectorFormDTO.SecondName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-sm-4 col-12">
+                                    <div class="form-group">
+                                        <label asp-for="@Model.addDirectorFormDTO.LastName" class="control-label">Last Name <span class="mandatory">*</span></label>
+                                        <input asp-for="@Model.addDirectorFormDTO.LastName" class="form-control" />
+                                        <span asp-validation-for="@Model.addDirectorFormDTO.LastName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xl-4 col-sm-4 col-12">
+                                    <div class="form-group">
+                                        <label asp-for="@Model.addDirectorFormDTO.SecondLastName" class="control-label">Second Last Name</label>
+                                        <input asp-for="@Model.addDirectorFormDTO.SecondLastName" class="form-control" />
+                                        <span asp-validation-for="@Model.addDirectorFormDTO.SecondLastName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-sm-4 col-12">
+                                    <div class="form-group">
+                                        <label asp-for="@Model.addDirectorFormDTO.Photo" class="control-label">Photo</label>
+                                        <input asp-for="@Model.addDirectorFormDTO.Photo" type="file" class="form-control" style="height:70px" />
+                                        <span asp-validation-for="@Model.addDirectorFormDTO.Photo" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-sm-4 col-12">
+                                    <div class="form-group">
+                                        <label asp-for="@Model.addDirectorFormDTO.BirthDate" class="control-label">Birth Date <span class="mandatory">*</span></label>
+                                        <input asp-for="@Model.addDirectorFormDTO.BirthDate" type="date" class="form-control" max="@maxDate" style="height:70px" />
+                                        <span asp-validation-for="@Model.addDirectorFormDTO.BirthDate" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xl-4 col-sm-4 col-12">
+                                    <div class="form-group">
+                                        <label asp-for="@Model.addDirectorFormDTO.BirthPlace" class="control-label">Birth Place</label>
+                                        <input asp-for="@Model.addDirectorFormDTO.BirthPlace" class="form-control"/>
+                                        <span asp-validation-for="@Model.addDirectorFormDTO.BirthPlace" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-sm-4 col-12">
+                                    <div class="form-group">
+                                        <label asp-for="@Model.addDirectorFormDTO.TC" class="control-label">TC <span class="mandatory">*</span></label>
+                                        <input asp-for="@Model.addDirectorFormDTO.TC" class="form-control" />
+                                        <span asp-validation-for="@Model.addDirectorFormDTO.TC" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-sm-4 col-12">
+                                    <div class="form-group">
+                                        <label asp-for="@Model.addDirectorFormDTO.StartDate" class="control-label">Start Date <span class="mandatory">*</span></label>
+                                        <input asp-for="@Model.addDirectorFormDTO.StartDate" type="date" class="form-control" min="@minDate" style="height:70px" />
+                                        <span asp-validation-for="@Model.addDirectorFormDTO.StartDate" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xl-4 col-sm-4 col-12">
+                                    <div class="form-group">
+                                        <label asp-for="@Model.addDirectorFormDTO.JobID" class="control-label">Job <span class="mandatory">*</span></label>
+                                        <select asp-for="@Model.addDirectorFormDTO.JobID" asp-items="@Model.Job" class="form-control"></select>
+                                        <span asp-validation-for="@Model.addDirectorFormDTO.JobID" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-sm-4 col-12">
+                                    <div class="form-group">
+                                        <label asp-for="@Model.addDirectorFormDTO.DepartmentID" class="control-label">Department <span class="mandatory">*</span></label>
+                                        <select asp-for="@Model.addDirectorFormDTO.DepartmentID" asp-items="@Model.Department" class="form-control"></select>
+                                        <span asp-validation-for="@Model.addDirectorFormDTO.DepartmentID" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-sm-4 col-12">
+                                    <div class="form-group">
+                                        <label asp-for="@Model.addDirectorFormDTO.Email" class="control-label">E-mail <span class="mandatory">*</span></label>
+                                        <input asp-for="@Model.addDirectorFormDTO.Email" class="form-control" />
+                                        <span asp-validation-for="@Model.addDirectorFormDTO.Email" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xl-4 col-sm-4 col-12">
+                                    <div class="form-group">
+                                        <label asp-for="@Model.addDirectorFormDTO.Address" class="control-label">Address <span class="mandatory">*</span></label>
+                                        <input asp-for="@Model.addDirectorFormDTO.Address" class="form-control" />
+                                        <span asp-validation-for="@Model.addDirectorFormDTO.Address" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-sm-4 col-12">
+                                    <div class="form-group">
+                                        <label asp-for="@Model.addDirectorFormDTO.PhoneNumber" class="control-label">Phone Number <span class="mandatory">*</span></label>
+                                        <input asp-for="@Model.addDirectorFormDTO.PhoneNumber" class="form-control" />
+                                        <span asp-validation-for="@Model.addDirectorFormDTO.PhoneNumber" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-sm-4 col-12">
+                                    <div class="form-group">
+                                        <label asp-for="@Model.addDirectorFormDTO.CompanyID" class="control-label">Company <span class="mandatory">*</span></label>
+                                        <select asp-for="@Model.addDirectorFormDTO.CompanyID" asp-items="@Model.Company" class="form-control"></select>
+                                        <span asp-validation-for="@Model.addDirectorFormDTO.CompanyID" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xl-12 col-sm-12 col-12">
+                                    <div class="form-btn">
+                                        <button type="submit" class="btn btn-apply">Create</button>
+                                        <a asp-area="AdminPanel" asp-controller="Director" asp-action="ListDirector" class="btn btn-secondary cancel-badehr">Cancel</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,141 @@
+﻿@model HumanResourcesMVC.Models.ViewModels.Advance.AddAdvanceVM
+
+@{
+    ViewData["Title"] = "NewAdvance";
+    // Layout = "_AdminLayout";
+
+    var salaryString = Context.Session.GetString("salary");
+    decimal salary = 0;
+    if (!string.IsNullOrEmpty(salaryString))
+    {
+        salary = decimal.Parse(salaryString);
+    }
+    decimal maxAdvance = salary * 3;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="~/Dashboard/assets/css/badehr-style.css" />
+
+</head>
+<body>
+    <div class="content container-fluid">
+        <div class="row">
+            <div class="col-xl-12 col-sm-12 col-12 ">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-titles">New Advance</h2>
+                    </div>
+                    <div class="form-creation">
+                        <form asp-action="NewAdvance">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="row">
+                                <div class="col-xl-4 col-sm-4 col-12 ">
+                                    <div class="form-group">
+                                        <label asp-for="AdvanceType">Advance Type <span class="mandatory">*</span> </label>
+                                        <select asp-for="AdvanceType" class="select">
+                                            <option value="1">Individual</option>
+                                            <option value="2">Institutional</option>
+                                        </select>
+                                        <span asp-validation-for="AdvanceType" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-sm-4 col-12 ">
+                                    <div class="form-group">
+                                        <label asp-for="Currency"></label>
+                                        <select asp-for="Currency" class="select">
+                                            <option value="1">USD</option>
+                                            <option value="2">Euro</option>
+                                            <option value="3">TL</option>
+                                        </select>
+                                        <span asp-validation-for="Currency" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-sm-4 col-12 ">
+                                    <div class="form-group">
+                                        <label asp-for="Amount"></label>
+                                        <input asp-for="Amount" type="number" min="1" max="@maxAdvance" step="0.01" class="form-control" style="height:70px;" />
+                                        <span asp-validation-for="Amount" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xl-12 col-sm-12 col-12 ">
+                                    <div class="form-group">
+                                        <label asp-for="Description"></label>
+                                        <textarea asp-for="Description" rows="4" cols="50">	</textarea>
+                                        <span asp-validation-for="Description" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xl-12 col-sm-12 col-12 ">
+                                    <div class="form-btn">
+                                        <button type="submit" class="btn btn-apply">Apply</button>
+                                        <a asp-area="EmployeePanel" asp-controller="Advance" asp-action="AdvanceList" class="btn btn-secondary cancel-badehr">Cancel</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+
+
+
+@* <h1>NewAdvance</h1>
+
+<h4>AddAdvanceVM</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="NewAdvance">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Amount" class="control-label"></label>
+                <input asp-for="Amount" class="form-control" />
+                <span asp-validation-for="Amount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Currency" class="control-label"></label>
+                <select asp-for="Currency" class="form-control">
+                    <option value="1">USD</option>
+                    <option value="2">Euro</option>
+                    <option value="3">TL</option>
+                </select>
+                <span asp-validation-for="Currency" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AdvanceType" class="control-label"></label>
+                <select asp-for="AdvanceType" class="form-control">
+                    <option value="1">Individual</option>
+                    <option value="2">Institutional</option>
+                </select>
+                <span asp-validation-for="AdvanceType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div> *@

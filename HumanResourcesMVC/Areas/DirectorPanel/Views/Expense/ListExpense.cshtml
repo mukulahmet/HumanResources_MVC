@@ -1,0 +1,196 @@
+﻿@model IEnumerable<HumanResourcesMVC.Models.ViewModels.ListExpenseDirectorVM>
+
+@{
+    ViewData["Title"] = "ListExpense";
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">Close </button>
+    </div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @TempData["ErrorMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">Close </button>
+    </div>
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+
+    <link rel="shortcut icon" href="~/Dashboard/assets/img/favicon.png">
+    <link rel="stylesheet" href="~/Dashboard/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Dashboard/assets/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="~/Dashboard/assets/plugins/fontawesome/css/fontawesome.min.css">
+    <link rel="stylesheet" href="~/Dashboard/assets/plugins/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="~/Dashboard/assets/css/style.css">
+    <link rel="stylesheet" href="~/Dashboard/assets/css/badehr-style.css" />
+
+    <style>
+        /* Bootstrap alert mesajları */
+        /* Kapatma butonunun genel görünümü */
+        .btn-close {
+            background-color: #f7f8f9;
+            border: 1px solid #000; /* Dış border rengi */
+            border-radius: 5px; /* Border kavisli yap */
+            margin-left: 20px;
+        }
+
+            /* Kapatma butonunun üzerine gelindiğinde */
+            .btn-close:hover {
+                background-color: white; /* Arka plan rengini şeffaf yap */
+                border-color: #000; /* Hover border rengini ayarla */
+            }
+
+            /* Kapatma butonunun içindeki çarpı işareti */
+            .btn-close::after {
+                content: "✖"; /* Çarpı işareti */
+                color: red; /* Çarpı işaretinin rengi */
+                font-size: 1rem; /* Çarpı işaretinin boyutu */
+            }
+
+        .btn-action-badehr:hover {
+            background-color: white;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="content container-fluid">
+        <div class="row">
+            <div class="col-xl-12 col-sm-12 col-12">
+                <div class="breadcrumb-path mb-4">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a asp-area="DirectorPanel" asp-controller="Home" asp-action="Index"><img src="~/Dashboard/assets/img/dash.png" class="mr-2" />Director</a>
+                        </li>
+                        <li class="breadcrumb-item active">Expense Requests</li>
+                    </ul>
+                    <h3>Expense Requests</h3>
+                </div>
+            </div>
+
+            <div class="col-xl-12 col-sm-12 col-12 mb-4">
+                <div class="row">
+                    <div class="col-xl-12 col-sm-8 col-12 ">
+                        @if (Model.Count() == 1)
+                        {
+                            <label class="employee_count">@Model.Count() Expense</label>
+                        }
+                        else
+                        {
+                            <label class="employee_count">@Model.Count() Expenses</label>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-12 col-sm-12 col-12 mb-4">
+                <div class="card">
+                    <div class="table-heading">
+                        <h2>Expense Requests</h2>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table  custom-table no-footer">
+                            <thead>
+                                <tr>
+                                    <th>Expense Type</th>
+                                    <th>Amount</th>
+                                    <th>Currency</th>
+                                    <th>File Path</th>
+                                    <th>First Name</th>
+                                    <th>Second Name</th>
+                                    <th>Last Name</th>
+                                    <th>Second Last Name</th>
+                                    <th>Request Date</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ExpenseType)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Amount)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Currency)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.FilePath)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.FirstName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.SecondFirstName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.LastName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.SecondLastName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.CreationDate)
+                                        </td>
+
+                                        <td>
+                                            <form asp-action="UpdateApprovalStatus" method="post">
+                                                <input type="hidden" name="expenseId" value="@item.ExpenseID" />
+                                                <div class="actionset">
+                                                    <label>
+                                                        <button type="submit" name="newStatus" value="1" style="font-size: 12px; font-weight: bold; color: #00882E; background-color: #fff; border: 1px solid #00882E; display: block; padding: 10px 15px; border-radius: 5px; text-decoration: none; position: relative;" onclick="return confirm('Are you sure you want to approve this expense?');" class="btn-action-badehr">
+                                                            <span style="position: relative; top: 2px;">Approve</span>
+
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="-2 -2 24 24" fill="#00882E" stroke="orange" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px; stroke: #00882E; margin-left: 5px; padding-top: 5px;">
+                                                                <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425z" />
+                                                            </svg>
+                                                        </button>
+                                                    </label>
+
+                                                    <label>
+                                                        <button type="submit" name="newStatus" value="3" style="font-size: 12px; font-weight: bold; color: #DC3545; background-color: #fff; border: 1px solid #DC3545; display: block; padding: 10px 15px; border-radius: 5px; text-decoration: none; position: relative;" onclick="return confirm('Are you sure you want to reject this expense?');" class="btn-action-badehr">
+                                                            <span style="position: relative; top: 2px;">Reject</span>
+
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="-2 -2 24 24" fill="#00882E" stroke="orange" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px; stroke: #DC3545; margin-left: 5px; padding-top: 5px;">
+                                                                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
+                                                            </svg>
+                                                        </button>
+                                                    </label>
+                                                </div>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
+
+
+
+
+

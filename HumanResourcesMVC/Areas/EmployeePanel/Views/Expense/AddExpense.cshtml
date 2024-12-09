@@ -1,0 +1,83 @@
+﻿@model HumanResourcesMVC.Models.ViewModels.Expense.AddExpenseVM
+
+@{
+    ViewData["Title"] = "AddExpense";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="~/Dashboard/assets/css/badehr-style.css" />
+</head>
+
+<body>
+    <div class="content container-fluid">
+        <div class="row">
+            <div class="col-xl-12 col-sm-12 col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-titles">Add Expense</h2>
+                    </div>
+                  
+                    <div class="form-creation">
+                        <form asp-action="AddExpense" enctype="multipart/form-data">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="row">
+                                <div class="col-xl-4 col-sm-4 col-12">
+                                    <div class="form-group">
+                                        <label asp-for="ExpenseType">Expense Type <span class="mandatory">*</span></label>
+                                        <select asp-for="ExpenseType" class="select">
+                                            <option value="1">Travel Expense</option>
+                                            <option value="2">Education Expense</option>
+                                            <option value="3">Food Expense</option>
+                                        </select>
+                                        <span asp-validation-for="ExpenseType" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-sm-4 col-12">
+                                    <div class="form-group">
+                                        <label asp-for="Currency">Currency <span class="mandatory">*</span></label>
+                                        <select asp-for="Currency" class="select">
+                                            <option value="1">USD</option>
+                                            <option value="2">Euro</option>
+                                            <option value="3">TL</option>
+                                        </select>
+                                        <span asp-validation-for="Currency" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-sm-4 col-12">
+                                    <div class="form-group">
+                                        <label asp-for="Amount">Amount <span class="mandatory">*</span></label>
+                                        <input asp-for="Amount" type="number" min="1" class="form-control" style="height:70px;"/>
+                                        <span asp-validation-for="Amount" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-12 col-sm-12 col-12">
+                                    <div class="form-group">
+                                        <label asp-for="FilePath">File Path </label>
+                                        <input asp-for="FilePath" type="file" class="form-control" />
+                                        <span asp-validation-for="FilePath" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-12 col-sm-12 col-12">
+                                    <div class="form-btn">
+                                        <button type="submit" class="btn btn-apply">Create</button>
+                                        <a asp-area="EmployeePanel" asp-controller="Expense" asp-action="ListExpense" class="btn btn-secondary cancel-badehr">Cancel</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,64 @@
+﻿@model LoginViewModel
+
+@{
+	ViewData["Title"] = "Login";
+	Layout = "";
+
+}
+
+
+
+<link rel="stylesheet" href="~/css/loginform.css" asp-append-version="true" />
+<div class="body-b">
+
+	
+
+	<div class="form-container">
+		<h1 class="form-title">Login</h1>
+
+		@if (TempData["email"] is not null)
+		{
+			<h3 class="text-green">@TempData["email"]</h3>
+		}
+
+		<form asp-action="Login" method="post">
+
+			<div class="form-group">
+				<label for="email">Email</label>
+				<input type="email" id="email" name="Email" class="form-control" value="@Model.Email" required />
+			</div>
+			<div class="form-group">
+				<label for="password">Password</label>
+				<input type="password" id="password" name="Password" class="form-control" required />
+			</div>
+			<button type="submit" class="submit-button">Login</button>
+
+			<div class="form-group" style="margin-top: 10px;">
+				<label><a asp-area="" asp-controller="Account" asp-action="ForgetPassword" style="color: #004d40;">Forgot password?</a></label>
+			</div>
+
+
+		</form>
+
+		@if (ViewData.ModelState.Values.Any(v => v.Errors.Count > 0))
+		{
+			<div class="error-message mt-3">
+				@foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+				{
+					<p>@error.ErrorMessage</p>
+				}
+			</div>
+		}
+	</div>
+</div>
+
+<style>
+	.text-green{
+		background-color: green;
+		color: aliceblue;
+		text-align: center;
+		border-radius: 10px;
+		padding: 1px;
+		margin-bottom: 10px;
+	}
+</style>

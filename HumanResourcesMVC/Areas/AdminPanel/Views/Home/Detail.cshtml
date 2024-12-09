@@ -1,0 +1,151 @@
+﻿@using HumanResourcesMVC.Models.ViewModels.User.AllUsers
+@model UserDetailVM
+
+
+<div class="content container-fluid">
+	<div class="page-name 	mb-4">
+		<h4 class="m-0"><img src="@Model.ImagePath" class="mr-1" alt="profile" /> Welcome @Model.Name</h4>
+		<label></label>
+	</div>
+
+	<div class="row mb-2">
+		<div class="col-12">
+			<div class="card board1 fill1">
+				<div class="card-body">
+					<div class="card_widget_header">
+						<h4>Your Profile</h4>
+					</div>
+					<div class="card_widget_img">
+						<img src="~/Dashboard/assets/img/dash1.png" alt="card-img" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	
+		<div class="content container-fluid">
+			<div class="row mb-4 justify-content-center">
+				<div class="col-xl-8 col-lg-10 col-md-12 col-sm-12">
+					<div class="card admin-summary mx-auto">
+						<div class="card-body">
+							<div class="card_widget_header">
+								<img src="@Model.ImagePath" class="admin-photo" alt="Admin Photo" />
+
+							</div>
+							<div class="admin-details">
+								<p><strong>Name:</strong>@Model.Name</p>
+								<p><strong>Second Name:</strong>@Model.SecondName</p>
+								<p><strong>Last Name:</strong>@Model.LastName</p>
+								<p><strong>Second Last Name:</strong>@Model.SecondLastName</p>
+								<p><strong>Birth Date:</strong>@Model.BirthDate.ToString("dd.MM.yyyy")</p>
+								<p><strong>Birth Place:</strong>@Model.BirthPlace</p>
+								<p><strong>TC:</strong>@Model.TC</p>
+								<p><strong>Phone Number</strong>@Model.PhoneNumber</p>
+								<p><strong>Start Date:</strong>@(Model.StartDate?.ToString("dd.MM.yyyy") ?? "")</p>
+							<p><strong>Termination Date:</strong>@(Model.TerminationDate?.ToString("dd.MM.yyyy") ?? "")</p>
+								<p><strong>Activity Status:</strong>@Model.ActivityStatus</p>
+								<p><strong>Address:</strong>@Model.Address</p>
+								<p><strong>Salary:</strong>@Model.Salary</p>
+								<p><strong>Email:</strong>@Model.Email</p>
+								<p><strong>Job:</strong>@Model.JobName</p>
+								<p><strong>Department:</strong>@Model.DepartmentName</p>
+							</div>
+							<div class="profile-button-wrapper">
+								<a asp-area="AdminPanel" asp-controller="Home" asp-action="Update" asp-route-id="@Model.Id" class="profile-button">Update</a>
+								<a asp-area="AdminPanel" asp-controller="Home" asp-action="Index" asp-route-id="@Model.Id" class="back-button">Back</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<style>
+				.admin-summary {
+					border: 1px solid #ddd;
+					border-radius: 10px;
+					background-color: #fff;
+					box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+					overflow: hidden;
+					padding: 20px;
+				}
+
+				.card_widget_header {
+					display: flex;
+					align-items: center;
+					margin-bottom: 20px;
+				}
+
+				.admin-photo {
+					width: 100px;
+					height: 100px;
+					border-radius: 50%;
+					margin-right: 20px;
+				}
+
+				.admin-name {
+					font-size: 2em;
+					margin: 0;
+				}
+
+				.admin-role {
+					font-size: 1.2em;
+					color: #888;
+				}
+
+				.admin-details p {
+					margin: 10px 0;
+					font-size: 1.1em;
+				}
+
+					.admin-details p strong {
+						display: inline-block;
+						width: 160px;
+					}
+
+				.row.mb-4.justify-content-center {
+					display: flex;
+					justify-content: center;
+				}
+
+				.profile-button-wrapper {
+					text-align: center;
+					margin-top: 20px;
+				}
+
+				.profile-button {
+					background-color: #007bff;
+					color: #fff;
+					border: none;
+					border-radius: 5px;
+					padding: 10px 20px;
+					font-size: 1.1em;
+					cursor: pointer;
+					transition: background-color 0.3s;
+				}
+
+					.profile-button:hover {
+						background-color: #0056b3;
+						color: white;
+					}
+
+				.back-button {
+					background-color: #DC3545;
+					color: #fff;
+					border: none;
+					border-radius: 5px;
+					padding: 10px 20px;
+					font-size: 1.1em;
+					cursor: pointer;
+					transition: background-color 0.3s;
+				}
+
+					.back-button:hover {
+						background-color: #a92835;
+						color: white;
+					}
+
+			</style>
+		</div>
+	
+</div>
